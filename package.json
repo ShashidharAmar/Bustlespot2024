@@ -1,0 +1,29 @@
+{
+  "name": "bustlespotautomation",
+  "version": "1.0.0",
+  "description": "automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js tests"
+  },
+  "keywords": [],
+  "author": "shashidhar",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.3.2",
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.11.30",
+    "cucumber-html-reporter": "^7.1.1",
+    "dotenv": "^16.4.5",
+    "playwright": "^1.42.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "playwright-core": "^1.42.1",
+    "undici-types": "^5.26.5"
+  }
+}

@@ -1,0 +1,27 @@
+{
+    "default": {
+        "dryRun": false,
+        "formatOptions": {
+            "snippestInterface": "async-await"
+        },
+        "paths": [
+            "tests/features/**/*.feature"
+        ],
+        "require": [
+            "tests/step_definitions/**/*.ts"
+        ],
+        "requireModule": [
+            "ts-node/register"
+        ],
+        "format": [
+            [
+                "html",
+                "reports/cucumber-report.html"
+            ],
+            [
+                "junit",
+                "reports/junit.xml"
+            ]
+        ]
+    }
+}

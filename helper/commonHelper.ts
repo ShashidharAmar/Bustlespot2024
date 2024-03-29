@@ -25,5 +25,4 @@ export default class commonHelper {
         const textvalue = await this.page.textContent(locator)
         return textvalue;
     }
-
 }

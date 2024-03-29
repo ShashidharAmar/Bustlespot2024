@@ -17,7 +17,8 @@ export default class LoginPageComponents extends commonhelper {
             email: "//label[text()='Email ID']/..//input",
             password: "//label[text()='Password']/..//input",
             toastMessage: "//div[contains(@class,'MuiAlert-message')]",
-            emailValidation: "//label[text()=\"Email ID\"]/..//p/span"
+            emailValidation: "//label[text()='Email ID']/..//p/span",
+            passwordValidation: "//label[text()='Password']/..//p/span"
         },
         link: {
             forgotPassword: "//a[text()='Forgot password?']"
@@ -27,7 +28,7 @@ export default class LoginPageComponents extends commonhelper {
     async loginToApp(email: string, password: string) {
         await this.fillField(this.locators.textField.email, email);
         await this.fillField(this.locators.textField.password, password);
-        await this.click(this.locators.button.login);   
+        await this.click(this.locators.button.login);
     }
 
     async loginToApplication() {
@@ -51,6 +52,34 @@ export default class LoginPageComponents extends commonhelper {
 
     async clickOnReset() {
         await this.click(this.locators.button.restPassword);
+    }
+
+    async enterEmailAndPassword(email: string, password: string) {
+        if (!email && !password) {
+            await this.waitForVisibility(this.locators.textField.email);
+            await this.page.locator(this.locators.textField.email).clear();
+            await this.fillField(this.locators.textField.email, 'passing null value')
+            await this.page.locator(this.locators.textField.email).clear();
+        } else {
+            await this.waitForVisibility(this.locators.textField.email);
+            await this.page.locator(this.locators.textField.email).clear();
+            await this.fillField(this.locators.textField.email, email);
+            await this.click(this.locators.textField.password);
+            await this.page.locator(this.locators.textField.password).clear();
+            await this.fillField(this.locators.textField.password, password);
+            await this.page.locator(this.locators.textField.password).clear();
+        }
+    }
+
+    async validateTextMessage(expectedText: string) {
+        try {
+            await this.waitForVisibility(this.locators.textField.emailValidation);
+            await expect(this.page.locator(this.locators.textField.emailValidation)).toHaveText(expectedText);
+
+        } catch (exception) {
+            await this.waitForVisibility(this.locators.textField.passwordValidation);
+            await expect(this.page.locator(this.locators.textField.passwordValidation)).toHaveText(expectedText);
+        }
     }
 
     async verifyToastMessage(text: string) {

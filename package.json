@@ -4,7 +4,8 @@
   "description": "automation",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js tests"
+    "test": "cucumber-js --tags",
+    "tests": "cucumber-js tests"
   },
   "keywords": [],
   "author": "shashidhar",

@@ -1,7 +1,9 @@
 
-import { After, AfterAll, AfterStep, Before, BeforeAll, BeforeStep, Status } from "@cucumber/cucumber";
+import { After, AfterAll, AfterStep, Before, BeforeAll, BeforeStep, Status, setDefaultTimeout } from "@cucumber/cucumber";
 import dotenv from "dotenv";
 import { Page, Browser, BrowserContext, chromium, firefox } from "@playwright/test"
+
+setDefaultTimeout(1000 * 60 * 2);
 
 let browser: Browser;
 let context: BrowserContext;

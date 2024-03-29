@@ -1,11 +1,11 @@
 import { When, Then } from "@cucumber/cucumber";
 import loginPageComponents from "../../pages/loginPageComponents";
-import {getPage} from "../../helper/hooks";
+import { getPage } from "../../helper/hooks";
 
-let forgotPasswordPage:loginPageComponents;
+let forgotPasswordPage: loginPageComponents;
 
 When('user click on the forgot password and enter {string}', async function (email: string) {
-    forgotPasswordPage =new loginPageComponents(getPage());
+    forgotPasswordPage = new loginPageComponents(getPage());
     await forgotPasswordPage.clickForgotPassword(email);
 });
 

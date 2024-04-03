@@ -57,17 +57,17 @@ export default class LoginPageComponents extends commonhelper {
     async enterEmailAndPassword(email: string, password: string) {
         if (!email && !password) {
             await this.waitForVisibility(this.locators.textField.email);
-            await this.page.locator(this.locators.textField.email).clear();
+            await this.clear(this.locators.textField.email);
             await this.fillField(this.locators.textField.email, 'passing null value')
-            await this.page.locator(this.locators.textField.email).clear();
+            await this.clear(this.locators.textField.email);
         } else {
             await this.waitForVisibility(this.locators.textField.email);
-            await this.page.locator(this.locators.textField.email).clear();
+            await this.clear(this.locators.textField.email);
             await this.fillField(this.locators.textField.email, email);
             await this.click(this.locators.textField.password);
-            await this.page.locator(this.locators.textField.password).clear();
+            await this.clear(this.locators.textField.password);
             await this.fillField(this.locators.textField.password, password);
-            await this.page.locator(this.locators.textField.password).clear();
+            await this.clear(this.locators.textField.password);
         }
     }
 

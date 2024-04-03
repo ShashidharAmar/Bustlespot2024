@@ -25,4 +25,8 @@ export default class commonHelper {
         const textvalue = await this.page.textContent(locator)
         return textvalue;
     }
+
+    async clear(locator:string){
+        await this.page.locator(locator).clear();
+    }
 }

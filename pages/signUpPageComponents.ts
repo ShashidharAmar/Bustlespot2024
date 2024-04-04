@@ -45,6 +45,15 @@ export default class LoginPageComponents extends commonhelper {
         await this.fillField(this.locators.textField.confirmPassword, firstName + passwords);
     }
 
+    async enterInvalidData(email: string, firstname: string, lastname: string, passwords: string) {
+        await this.waitForVisibility(this.locators.textField.emailId);
+        await this.fillField(this.locators.textField.emailId, email);
+        await this.fillField(this.locators.textField.firstName, firstname);
+        await this.fillField(this.locators.textField.lastName, lastname);
+        await this.fillField(this.locators.textField.password, passwords);
+        await this.fillField(this.locators.textField.confirmPassword, passwords + "#123");
+    }
+
     async clickOnSignup() {
         const signUpButton = await this.page.locator(this.locators.button.signUp);
         if (await signUpButton.isVisible()) {
@@ -54,28 +63,18 @@ export default class LoginPageComponents extends commonhelper {
             firstName = faker.person.firstName();
             lastName = faker.person.lastName();
         }
-
     }
 
-    // async successMessage(String message) {
-    // 	wt.waitForVisibility(messagePopup);
-    // 	String actualText = messagePopup.getText();
-    // 	if (actualText.contains(message)) {
-    // 		Assert.assertEquals(actualText, message);
-    // 		System.out.println(actualText);
-    // 	} else {
-    // 		System.out.println(actualText);
-    // 	}
-    // }
-
-    async enterBlankValues() {
+    async clearTextfields() {
         await this.waitForVisibility(this.locators.textField.emailId);
         await this.clear(this.locators.textField.emailId);
         await this.clear(this.locators.textField.firstName);
         await this.clear(this.locators.textField.lastName);
         await this.clear(this.locators.textField.password);
         await this.clear(this.locators.textField.confirmPassword);
+    }
 
+    async validateMessage() {
         await expect(this.page.locator(this.locators.validate.email)).toHaveText("Please enter your email");
         await expect(this.page.locator(this.locators.validate.firstName)).toHaveText("Please enter your first name");
         await expect(this.page.locator(this.locators.validate.lastname)).toHaveText("Please enter your last name");
@@ -83,26 +82,11 @@ export default class LoginPageComponents extends commonhelper {
         await expect(this.page.locator(this.locators.validate.confirmPassword)).toHaveText("Please enter your confirm password");
     }
 
-    // async enterInvalidValues() throws AWTException, InterruptedException {
-    // 	Robot robot = new Robot();
-    // 	firstName.click();
-    // 	Thread.sleep(2000);
-    // 	robot.keyPress(KeyEvent.VK_D);
-    // 	lastName.click();
-    // 	Thread.sleep(2000);
-    // 	robot.keyPress(KeyEvent.VK_D);
-    // 	String emailActualText = emailTextbox.getText().stripTrailing();
-    // 	Assert.assertEquals(emailActualText, "Please enter a valid email address");
-    // 	wt.waitForVisibility(firstNameTextbox);
-    // 	String firstnameActualText = firstNameTextbox.getText().stripTrailing();
-    // 	Assert.assertEquals(firstnameActualText, "Please enter valid first name");
-    // 	wt.waitForVisibility(lastNameTextbox);
-    // 	String lastnameActualText = lastNameTextbox.getText().stripTrailing();
-    // 	Assert.assertEquals(lastnameActualText, "Please enter valid last name");
-    // 	String passwordActualText = passwordTextbox.getText().stripTrailing();
-    // 	Assert.assertEquals(passwordActualText,
-    // 			"The password should include minimum 8 characters, 1 uppercase, 1 special character, 1 number, 1 lowercase");
-    // 	String confirmPasswordActualText = confirmPasswordTextbox.getText().stripTrailing();
-    // 	Assert.assertEquals(confirmPasswordActualText, "Confirm password should match with password");
-    // }
+    async invalidMessage() {
+        await expect(this.page.locator(this.locators.validate.email)).toHaveText("Please enter a valid email address");
+        await expect(this.page.locator(this.locators.validate.firstName)).toHaveText("Please enter valid first name");
+        await expect(this.page.locator(this.locators.validate.lastname)).toHaveText("Please enter valid last name");
+        await expect(this.page.locator(this.locators.validate.password)).toHaveText("The password should include minimum 8 characters, 1 uppercase, 1 special character, 1 number, 1 lowercase");
+        await expect(this.page.locator(this.locators.validate.confirmPassword)).toHaveText("Confirm password should match with password");
+    }
 }

@@ -20,7 +20,18 @@ When('navigate to back', async function () {
     await getPage().goBack();
 });
 
+When('remove values from all textbox', async function () {
+    await signUpPage.clearTextfields();
+});
 
-// Then('enter blank values in all textbox and verify the error message', async function () {
+Then('Verify the all textbox validation message', async function () {
+    await signUpPage.validateMessage();
+});
 
-// });
+When("enter invalid {string},{string},{string},{string} and confirmPassword", async function (email: string, firstname: string, lastname: string, passwords: string) {
+    await signUpPage.enterInvalidData(email, firstname, lastname, passwords);
+});
+
+Then('Verify the invalid error message', async function () {
+    await signUpPage.invalidMessage();
+});

@@ -16,24 +16,25 @@ Feature: Verify the signUp page.
       | emailId    | password | created                                                     | exists                              |
       | @gmail.com | #123     | User has been created successfully.Please verify the email. | User already exists please sign in. |
 
-#   @loginScreen @signUp
-#   Scenario Outline: Entering null values to the textbox and verify error message
-#     Given user in login screen
-#     When user in lagin page and click on signUp
-#     And enter "<emailId>","<firstName>","<lastName>","<password>", and "<confirmPassword>"
-#     Then enter blank values in all textbox and verify the error message
+  @loginScreen @signUp
+  Scenario Outline: Entering null values to the textbox and verify error message
+    Given user in login screen
+    When user in lagin page and click on signUp
+    And fill all details with "<emailId>" and "<password>"
+    And remove values from all textbox
+    Then Verify the all textbox validation message
 
-#     Examples: 
-#       | emailId    | firstName         | lastName          | password   | confirmPassword |
-#       | abc@gmail. | sixteenCharrector | MaximumCharrector | Shashi#123 | Shashi#12       |
+    Examples: 
+      | emailId | password |
+      | @gmail. | #123     |
 
-#   @loginScreen @signUp
-#   Scenario Outline: Entering invalid values to the textbox and verify error message
-#     Given user in login screen
-#     When user in lagin page and click on signUp
-#     And enter "<emailId>","<firstName>","<lastName>","<password>", and "<confirmPassword>"
-#     Then enter invalid values in all textbox and verify the error message
+  @loginScreen @signUp
+  Scenario Outline: Entering invalid values to the textbox and verify error message
+    Given user in login screen
+    When user in lagin page and click on signUp
+    And enter invalid "<emailId>","<firstName>","<lastName>","<password>" and confirmPassword
+    Then Verify the invalid error message
 
-#     Examples: 
-#       | emailId    | firstName          | lastName           | password | confirmPassword |
-#       | abc@gmail. | sixteenCharrectors | MaximumCharrectors | Shashi   | Shashi#1234     |
+    Examples: 
+      | emailId    | firstName          | lastName           | password |
+      | abc@gmail. | sixteenCharrectors | MaximumCharrectors | Shashi   |
